@@ -1,19 +1,20 @@
 import numpy as np
 
 
-class GreedyFrog():
+class GreedyFrog:
     def __init__(self, population, meme_size, weights, values, limitation):
         self.population = population
         self.meme_size = meme_size
         self.group_num = int(population / meme_size)
-        self.weights = weights
-        self.values = values
+        self.weights = weights.flatten()
+        self.values = values.flatten()
         self.limitation = limitation
         assert weights.shape == values.shape
-        self.dim = weights.shape[0]
+        self.dim = weights.shape[1]
         self.global_best = None
         self.density = np.array(values).astype(np.float) / (np.array(weights).astype(np.float) + 1e-5)
-        self.sorted_density_idx = np.argsort(-self.density)
+        self.sorted_density_idx = np.argsort(-self.density).flatten()
+
 
     def init(self):
         self.frogs = np.random.randint(0, 2, size=(self.population, self.dim))
