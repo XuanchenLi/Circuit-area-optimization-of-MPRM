@@ -18,7 +18,7 @@ def dp(w, p, c):
 
 
 if __name__ == '__main__':
-    n = 1500
+    n = 7000
     ans = 0
     best = 0
     w = np.random.randint(1, 10, (1, n))
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     for i in range(5):
         model = GreedyFrog(20, 5, w, p, c)
         model.init()
-        res = model.train(50)
+        res = model.train(10)
         print(res[1])
         ans = ans + res[1]
         if res[1] > best:

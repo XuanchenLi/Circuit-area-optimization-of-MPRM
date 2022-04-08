@@ -22,7 +22,9 @@ class GreedyFrog:
 
 
     def init(self):
-        self.frogs = np.random.randint(0, 2, size=(self.population, self.dim))
+        self.frogs = np.random.randint(0, 2, size=(int(self.population / 2), self.dim))
+        pair_frogs = 1 - self.frogs
+        self.frogs = np.vstack((self.frogs, pair_frogs))
         self.fitness, self.frogs = self.get_fitness_with_limit(self.frogs)
 
     def get_fitness(self, frogs):
@@ -82,19 +84,21 @@ class GreedyFrog:
 
                 dis = (np.random.rand(1, self.frogs[local_best].shape[0]) *
                        (self.frogs[local_best] - self.frogs[local_worst]))
-                dis = dis.round().astype(np.int)
+                dis[dis >= 0.5] = 1
+                dis[dis < 0.5] = 0
                 temp = self.frogs[local_worst] + dis
-                temp[temp < 0] = 0
+                # temp[temp < 0] = 0
                 temp_f, temp = self.get_fitness_with_limit(temp)
                 if temp_f > self.fitness[local_worst]:
                     self.frogs[local_worst] = temp
                     self.fitness[local_worst] = temp_f
                 else:
                     dis = (np.random.rand(1, self.frogs[global_best].shape[0]) *
-                           (self.frogs[global_best] - self.frogs[local_worst])) \
-                        .round().astype(np.int)
+                           (self.frogs[global_best] - self.frogs[local_worst]))
+                    dis[dis >= 0.5] = 1
+                    dis[dis < 0.5] = 0
                     temp = self.frogs[local_worst] + dis
-                    temp[temp < 0] = 0
+                    # temp[temp < 0] = 0
                     temp_f, temp = self.get_fitness_with_limit(temp)
                     if temp_f > self.fitness[local_worst]:
                         self.frogs[local_worst] = temp
@@ -117,7 +121,7 @@ class GreedyFrog:
             self.sort()
             self.grouping()
             global_best = self.frogs[self.groups[0][0]]
-            new_best = self.evolve(500)
+            new_best = self.evolve(100)
             # print(i, ":", self.fitness[new_best])
             if self.get_fitness(global_best) >= self.fitness[new_best]:
                 cur_t += 1
