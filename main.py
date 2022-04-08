@@ -41,7 +41,7 @@ if __name__ == '__main__':
     print("best: ", best)
     print("ave: ", ans / 5.0)
     time_end2 = time.time()
-    print('time cost', (time_end2 - time_start2) / 10, 's')
+    print('time cost', (time_end2 - time_start2) / 5, 's')
 
 
 
