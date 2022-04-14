@@ -113,7 +113,7 @@ class GreedyFrog:
         return global_best
 
     def train(self, times):
-        max_t = max(1, int(times * 0.5))
+        max_t = max(5, int(times * 0.5))
         cur_t = 0
         global_best = []
         for i in range(times):
@@ -121,7 +121,7 @@ class GreedyFrog:
             self.sort()
             self.grouping()
             global_best = self.frogs[self.groups[0][0]]
-            new_best = self.evolve(100)
+            new_best = self.evolve(15)
             # print(i, ":", self.fitness[new_best])
             if self.get_fitness(global_best) >= self.fitness[new_best]:
                 cur_t += 1

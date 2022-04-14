@@ -18,11 +18,11 @@ def dp(w, p, c):
 
 
 if __name__ == '__main__':
-    n = 7000
+    n = 2000
     ans = 0
     best = 0
     w = np.random.randint(1, 10, (1, n))
-    p = w + 5
+    p = np.random.randint(1, 15, (1, n))
     c = int(np.sum(w) / 2)
     time_start1 = time.time()
     print("ground truth: ", dp(w, p, c))
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     for i in range(5):
         model = GreedyFrog(20, 5, w, p, c)
         model.init()
-        res = model.train(10)
+        res = model.train(5)
         print(res[1])
         ans = ans + res[1]
         if res[1] > best:
