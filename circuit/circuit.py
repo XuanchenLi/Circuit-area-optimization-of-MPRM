@@ -9,6 +9,8 @@ class BooleanCircuit:
         self.terms = terms
         self.outs = outs
 
+    def toMinimum(self):
+        pass
 
 class MPRM:
     def __init__(self, in_num, out_num, term_num, polarity, terms=None, outs=None):
@@ -19,8 +21,11 @@ class MPRM:
         self.outs = outs
         self.polarity = polarity
 
-    def fromBoolean(self, booleanCircuit):
-        pass
+    def fromBoolean(self, booleanCircuit, polarity):
+        booleanCircuit.toMinimum()
+        l = 1
+        k = booleanCircuit.in_num - 1
+        
 
     def turnTo(self, polarity):
         pass
