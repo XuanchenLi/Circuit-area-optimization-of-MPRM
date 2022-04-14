@@ -14,9 +14,11 @@ class Parser:
         term_num = 0
         out_num = 0
         terms = None
+        outs = None
         cnt = 0
         flag = False
         s_terms = []
+        s_outs = []
         while True:
             line = f.readline()
             line = line[:-1]
@@ -29,12 +31,15 @@ class Parser:
                     elif line[1] == 'p' and line[2] == ' ':
                         term_num = int(line[3:])
                         terms = np.zeros((term_num, in_num))
+                        outs = np.zeros((term_num, out_num))
                 elif line[0] == '1' or line[0] == '0' or line[0] == '-':
                     if term_num == 0:
                         flag = True
                         s_terms.append(line[:in_num])
+                        s_outs.append(line[in_num+1:])
                     else:
                         term = line[:in_num]
+                        out = line[in_num+1:]
                         for i in range(in_num):
                             if term[i] == '0':
                                 terms[cnt][i] = 0
@@ -42,6 +47,13 @@ class Parser:
                                 terms[cnt][i] = 1
                             else:
                                 terms[cnt][i] = -1
+                        for i in range(out_num):
+                            if out[i] == '0':
+                                outs[cnt][i] = 0
+                            elif out[i] == '1':
+                                outs[cnt][i] = 1
+                            else:
+                                outs[cnt][i] = -1
                     cnt += 1
             else:
                 break
@@ -49,6 +61,7 @@ class Parser:
         if flag:
             term_num = cnt
             terms = np.zeros((term_num, in_num))
+            outs = np.zeros((term_num, out_num))
             for s in range(term_num):
                 for i in range(in_num):
                     if s_terms[s][i] == '0':
@@ -57,5 +70,12 @@ class Parser:
                         terms[s][i] = 1
                     else:
                         terms[s][i] = -1
-        return BooleanCircuit(in_num, out_num, term_num, terms)
+                for i in range(out_num):
+                    if s_outs[s][i] == '0':
+                        outs[s][i] = 0
+                    elif s_outs[s][i] == '1':
+                        outs[s][i] = 1
+                    else:
+                        outs[s][i] = -1
+        return BooleanCircuit(in_num, out_num, term_num, terms, outs)
 
