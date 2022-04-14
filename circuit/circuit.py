@@ -87,6 +87,5 @@ class MPRM:
         self.terms=unique
         self.term_num=np.shape(unique)[0]
 
-
     def turnTo(self, polarity):
         pass
