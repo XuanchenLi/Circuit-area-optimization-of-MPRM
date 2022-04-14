@@ -14,7 +14,7 @@ class BooleanCircuit:
             fix_num = 0
             for i in range(self.term_num):
                 minterm = self.terms[i, :]
-                position = minterm.where()
+                position = minterm.where(minterm==-1)
                 fix = minterm
                 if position:
                     fix_num += 1
