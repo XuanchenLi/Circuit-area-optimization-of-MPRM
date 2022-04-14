@@ -30,7 +30,7 @@ class BooleanCircuit:
             np.delete(self.terms, np.s_[:self.term_num])  # 删除
             self.term_num = np.shape(self.terms)[0]  # 获取新行数
 
-        self.teems = np.unique(self.terms, axis=0)  # 删除重复行
+        self.terms = np.unique(self.terms, axis=0)  # 删除重复行
 
   
 class MPRM:
