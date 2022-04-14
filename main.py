@@ -1,6 +1,8 @@
 import numpy as np
 from greedy_frog import GreedyFrog
 import time
+import os
+from circuit.pla_parser import Parser
 
 
 def test(inputs, w, limits):
@@ -18,9 +20,11 @@ def dp(w, p, c):
 
 
 if __name__ == '__main__':
+
     n = 2000
     ans = 0
     best = 0
+    """
     w = np.random.randint(1, 10, (1, n))
     p = np.random.randint(1, 15, (1, n))
     c = int(np.sum(w) / 2)
@@ -42,6 +46,12 @@ if __name__ == '__main__':
     print("ave: ", ans / 5.0)
     time_end2 = time.time()
     print('time cost', (time_end2 - time_start2) / 5.0, 's')
+    """
+    parser = Parser("dataset/mcnc")
+    files = os.listdir("dataset/mcnc")
+    for f in files:
+        res = parser.parse(f)
+
 
 
 
