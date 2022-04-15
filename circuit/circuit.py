@@ -73,7 +73,8 @@ class MPRM:
         k = booleanCircuit.in_num - 1
         for i in reversed(range(len(polarity))):
             #从高到低遍历极性的每一位
-            for j in range(len(self.term_num)):
+
+            for j in range(len(mixtir.term_num)):
                 #对所有行进行操作
                 if polarity[i] == 2:
                     if i-1<0:
