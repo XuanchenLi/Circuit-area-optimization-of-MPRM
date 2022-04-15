@@ -20,6 +20,7 @@ class BooleanCircuit:
         while (True):
             fix_num = 0
             for i in range(self.term_num):
+                #遍历terms每一项 进行最小项转换
                 minterm = self.terms[i, :]
                 position = minterm.where(minterm==-1)
                 fix = minterm
@@ -27,17 +28,32 @@ class BooleanCircuit:
                     fix_num += 1
                     fix[position[0]] = 0
                     np.append(self.terms, fix, axis=0)
+                    np.append(self.outs,self.outs[i,:])
                     fix[position[0]] = 1
                     np.append(self.terms, fix, axis=0)
+                    np.append(self.outs, self.outs[i, :])
                 else:
                     np.append(self.terms)
+                    np.append(self.outs, self.outs[i, :])
             if fix_num == 0:
                 # 矩阵中不存在-1跳出
                 break
-            np.delete(self.terms, np.s_[:self.term_num])  # 删除
+            # 删除
+            np.delete(self.terms, np.s_[:self.term_num])
+            np.delete(self.terms,np.s_[:self.term_num])
             self.term_num = np.shape(self.terms)[0]  # 获取新行数
 
-        self.terms = np.unique(self.terms, axis=0)  # 删除重复行
+        past_vir = self.terms
+        # 删除重复行
+        self.terms = np.unique(self.terms, axis=0)
+        #删除outs中与被删除terms相对应的行
+        j = 0
+        for i in range(np.shape(past_vir)[0]):
+            if past_vir[i, :] != self.terms[j, :]:
+                np.delete(self.outs,i,axis=0)
+            else :
+                j+=1
+        self.term_num = np.shape(self.terms)[0]
         return self.terms
 
 
