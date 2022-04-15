@@ -84,6 +84,7 @@ if __name__ == '__main__':
     cir = MPRM(in_num, out_num, term_num, polarity, terms, outs)
     # print(cir.terms)
     cir.turnTo(np.array([0, 0, 0]).reshape(-1, 1))
+    print(cir.terms, cir.outs)
 
 
 
