@@ -3,8 +3,9 @@ import numpy as np
 
 def get_xor(p1, p2):
     q = np.zeros(p1.shape)
-    for i in p1.shape[1]:
-        q[i] = p1[i] ^ p2[i]
+    # print(p1, p2)
+    for i in range(p1.shape[0]):
+        q[i] = (p1[i] ^ p2[i])
     return q
 
 
@@ -53,63 +54,68 @@ class MPRM:
         booleanCircuit.toMinimum()
         l = 1
         k = booleanCircuit.in_num - 1
-        
 
     def turnTo(self, polarity):
         Q = get_xor(self.polarity, polarity)
-        l = 1
-        t = self.term_num
-        k = self.in_num - 1
+        l = 0
+        k = 0
         new_terms = []
         new_outs = []
         while True:
             # S2
             if Q[k] != 0:
                 if Q[k] == 1 and self.terms[l][k] == 1:
-                    new_t = self.terms[l][k]
+                    new_t = self.terms[l].copy()
                     new_t[k] = 0
-                    new_o = self.outs[l][k]
+                    new_o = self.outs[l].copy()
                     new_terms.append(new_t)
                     new_outs.append(new_o)
                 elif Q[k] == 2 and self.terms[l][k] == 0:
-                    new_t = self.terms[l][k]
+                    new_t = self.terms[l].copy()
                     new_t[k] = 1
-                    new_o = self.outs[l][k]
+                    new_o = self.outs[l].copy()
                     new_terms.append(new_t)
                     new_outs.append(new_o)
                 elif Q[k] == 3 and self.polarity[k] == 2 and self.terms[l][k] == 1:
-                    new_t = self.terms[l][k]
+                    new_t = self.terms[l].copy()
                     new_t[k] = 0
-                    new_o = self.outs[l][k]
+                    new_o = self.outs[l].copy()
                     new_terms.append(new_t)
                     new_outs.append(new_o)
                 elif Q[k] == 3 and self.polarity[k] == 1 and self.terms[l][k] == 0:
-                    new_t = self.terms[l][k]
+                    new_t = self.terms[l].copy()
                     new_t[k] = 1
-                    new_o = self.outs[l][k]
+                    new_o = self.outs[l].copy()
                     new_terms.append(new_t)
                     new_outs.append(new_o)
                 # S3
+                # print(l, k, new_terms)
                 l = l + 1
-                if l <= t:
+                if l < self.term_num:
                     continue  # 转S2
                 # S4 S5
+                # print(self.terms)
                 self.merge(np.vstack(new_terms), np.vstack(new_outs))
+                new_terms = []
+                new_outs = []
             # S6
-            l = 1
-            k = k - 1
-            if k < 0:
+            l = 0
+            k = k + 1
+            if k >= self.in_num:
                 break
+        self.polarity = polarity
 
     def merge(self, new_terms, new_outs):
+        # print(1, new_terms, self.terms)
         de = np.zeros(new_terms.shape[0])
         for i in range(new_terms.shape[0]):
             for j in range(self.term_num):
                 if np.array_equal(new_terms[i], self.terms[j]):
-                    os = get_xor(self.outs[j], new_outs)
+                    # print(new_outs[i])
+                    os = get_xor(self.outs[j], new_outs[i])
                     if np.array_equal(os, np.zeros(self.out_num)):
-                        np.delete(self.terms, j)
-                        np.delete(self.outs, j)
+                        self.terms = np.delete(self.terms, j, 0)
+                        self.outs = np.delete(self.outs, j, 0)
                         self.term_num -= 1
                         de[i] = 1
                         break
@@ -122,6 +128,7 @@ class MPRM:
                 self.terms = np.concatenate(self.terms, new_terms[i])
                 self.outs = np.concatenate(self.outs, new_outs[i])
                 self.term_num += 1
+        # print(2, self.terms, self.outs)
 
 
 
