@@ -20,7 +20,6 @@ class GreedyFrog:
         self.sorted_density_idx = np.argsort(-self.density).flatten()
         self.sorted_weight_idx = np.argsort(-self.weights).flatten()
 
-
     def init(self):
         self.frogs = np.random.randint(0, 2, size=(int(self.population / 2), self.dim))
         pair_frogs = 1 - self.frogs

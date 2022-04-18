@@ -51,7 +51,11 @@ class BooleanCircuit:
         Minterm=np.delete(Minterm,index,axis=0)
         self.terms=Minterm[:,:self.in_num]
         self.outs=Minterm[:,:self.in_num+1:self.in_num+self.outs]
-  
+
+    def get_area(self):
+        return self.term_num
+
+
 class MPRM:
     def __init__(self, in_num, out_num, term_num, polarity, terms=None, outs=None):
         self.in_num = in_num
@@ -190,6 +194,9 @@ class MPRM:
                 self.terms = np.concatenate((self.terms, new_terms[i].reshape(1, -1)))
                 self.outs = np.concatenate((self.outs, new_outs[i].reshape(1, -1)))
                 self.term_num += 1
+
+        def get_area(self):
+            return self.term_num
 
 
 
