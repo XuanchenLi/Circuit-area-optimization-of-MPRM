@@ -64,7 +64,7 @@ if __name__ == '__main__':
             print("m", i)
             model = JumpFrog(20, 5, mprm)
             model.init()
-            res = model.train(5)
+            res = model.train(1)
             print(-res[1])
             ans = ans + res[1]
             if res[1] < best:
