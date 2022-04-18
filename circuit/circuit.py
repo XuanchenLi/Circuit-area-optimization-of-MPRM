@@ -24,10 +24,9 @@ class BooleanCircuit:
             for i in range(self.term_num):
                 # 遍历terms每一项 进行最小项转换
                 minterm = np.array(Minterm[i, :].reshape(-1))
-                # position = minterm.where(minterm == -1)
-                position = minterm[minterm == -1]
+                position = np.where(minterm == -1)
                 fix = np.array(minterm)
-                if (position == -1).any():
+                if np.shape(position)[1]!=0:
                     fix_num += 1
                     fix[position[0]] = 0
 
@@ -43,16 +42,16 @@ class BooleanCircuit:
             Minterm = np.delete(Minterm, np.s_[:self.term_num],axis=0)
             self.term_num = np.shape(Minterm)[0]  # 获取新行数
         # 去重
-        unique = np.unique(np.array(Minterm[:, :self.in_num]))
+        unique = np.unique(np.array(Minterm[:, :self.in_num]),axis=0)
         index = []
         for i in range(self.term_num):
             if (Minterm[i, :self.in_num] == unique[0, :]).all():
-                unique = np.delete(unique, 0, index=0)
+                unique = np.delete(unique, 0, axis=0)
             else:
                 index.append(i)
         Minterm = np.delete(Minterm, index, axis=0)
         self.terms = Minterm[:, :self.in_num]
-        self.outs = Minterm[:, :self.in_num + 1:self.in_num + self.outs]
+        self.outs = Minterm[:, self.in_num + 1:self.in_num + self.out_num]
 
     def get_area(self):
         return self.term_num
