@@ -42,16 +42,24 @@ class BooleanCircuit:
             Minterm = np.delete(Minterm, np.s_[:self.term_num],axis=0)
             self.term_num = np.shape(Minterm)[0]  # 获取新行数
         # 去重
+        Minterm=np.unique(Minterm,axis=0)
+        self.term_num=np.shape(Minterm)[0]
         unique = np.unique(np.array(Minterm[:, :self.in_num]),axis=0)
         index = []
         for i in range(self.term_num):
             if (Minterm[i, :self.in_num] == unique[0, :]).all():
                 unique = np.delete(unique, 0, axis=0)
             else:
+                for j in range(i):
+                    #解决最小项相同但出现位置不同的情况
+                    if(Minterm[j,:self.in_num]==unique[0,:]).all():
+                        Minterm[i,self.in_num:]+=Minterm[j,self.in_num:]
+                        temp=Minterm[i,self.in_num:]
+                        temp[temp>1]=1
                 index.append(i)
         Minterm = np.delete(Minterm, index, axis=0)
         self.terms = Minterm[:, :self.in_num]
-        self.outs = Minterm[:, self.in_num + 1:self.in_num + self.out_num]
+        self.outs = Minterm[:, self.in_num :self.in_num + self.out_num]
 
     def get_area(self):
         return self.term_num
