@@ -23,7 +23,7 @@ def dp(n, w, p, c):
 
 if __name__ == '__main__':
     """
-    n = 2000
+    n = 5000
     ans = 0
     best = 0
 
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     p = np.random.randint(1, 15, (1, n))
     c = int(np.sum(w) / 2)
     time_start1 = time.time()
-    print("ground truth: ", dp(w, p, c))
+    print("ground truth: ", dp(n, w, p, c))
     time_end1 = time.time()
     print('time cost', time_end1 - time_start1, 's')
 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     for i in range(5):
         model = GreedyFrog(20, 5, w, p, c)
         model.init()
-        res = model.train(5)
+        res = model.train(20)
         print(res[1])
         ans = ans + res[1]
         if res[1] > best:
@@ -48,8 +48,8 @@ if __name__ == '__main__':
     print("ave: ", ans / 5.0)
     time_end2 = time.time()
     print('time cost', (time_end2 - time_start2) / 5.0, 's')
-    """
 
+    """
     parser = Parser("dataset/mcnc")
     files = os.listdir("dataset/mcnc")
     for f in files:
@@ -72,6 +72,7 @@ if __name__ == '__main__':
         print("ave: ", ans / 5.0)
         time_end2 = time.time()
         print('time cost', (time_end2 - time_start2) / 5.0, 's')
+
 
 
 

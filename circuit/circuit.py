@@ -27,7 +27,7 @@ class BooleanCircuit:
                 # position = minterm.where(minterm == -1)
                 position = minterm[minterm == -1]
                 fix = np.array(minterm)
-                if (position==-1).any():
+                if (position == -1).any():
                     fix_num += 1
                     fix[position[0]] = 0
 

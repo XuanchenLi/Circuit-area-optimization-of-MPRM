@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def test(inputs, w, limits):
@@ -112,10 +113,13 @@ class GreedyFrog:
         return global_best
 
     def train(self, times):
+        x = []
+        y = []
         max_t = max(5, int(times * 0.5))
         cur_t = 0
         global_best = []
         for i in range(times):
+            x.append(i)
             self.fitness, self.frogs = self.get_fitness_with_limit(self.frogs)
             self.sort()
             self.grouping()
@@ -123,11 +127,17 @@ class GreedyFrog:
             new_best = self.evolve(15)
             # print(i, ":", self.fitness[new_best])
             if self.get_fitness(global_best) >= self.fitness[new_best]:
+                y.append(self.get_fitness(global_best)[0])
                 cur_t += 1
                 if cur_t >= max_t:
+                    plt.plot(np.array(x), np.array(y).squeeze(2))
+                    plt.show()
                     return global_best, self.get_fitness(global_best)
             else:
+                y.append(self.fitness[new_best])
                 cur_t = 0
                 global_best = self.frogs[new_best]
         # print(test(self.frogs[global_best], self.weights, self.limitation))
+        plt.plot(np.array(x), np.array(y).squeeze(0))
+        plt.show()
         return global_best, self.get_fitness(global_best)
