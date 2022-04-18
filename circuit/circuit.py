@@ -69,6 +69,8 @@ class BooleanCircuit:
 
 def get_polarity_num(polarity):
     res = 0
+    polarity = polarity.astype(int)
+    # print(polarity)
     for i in range(polarity.shape[0]):
         res = res*3 + polarity[i]
     return res

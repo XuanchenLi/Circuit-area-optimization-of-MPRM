@@ -24,6 +24,8 @@ class JumpFrog:
 
     def get_fitness(self, frogs):
         res = []
+        frogs = frogs.reshape(-1, self.dim).astype(int)
+        # print(frogs.shape)
         for i in range(frogs.shape[0]):
             res.append(self.get_one_fitness(frogs[i]))
         res = np.array(res).reshape((frogs.shape[0], -1))
@@ -58,9 +60,13 @@ class JumpFrog:
 
                 dis = (np.random.rand(1, self.frogs[local_best].shape[0]) *
                        (self.frogs[local_best] - self.frogs[local_worst]))
-                dis[dis >= 1.5] = 2
-                dis[0.5 <= dis < 1.5] = 1
-                dis[dis < 0.5] = 0
+                for it in range(dis.shape[1]):
+                    if dis[0][it] >= 1.5:
+                        dis[0][it] = 2
+                    elif 0.5 <= dis[0][it] < 1.5:
+                        dis[0][it] = 1
+                    elif dis[0][it] < 0.5:
+                        dis[0][it] = 0
                 temp = self.frogs[local_worst] + dis
                 # temp[temp < 0] = 0
                 temp_f = self.get_fitness(temp)
@@ -70,9 +76,13 @@ class JumpFrog:
                 else:
                     dis = (np.random.rand(1, self.frogs[global_best].shape[0]) *
                            (self.frogs[global_best] - self.frogs[local_worst]))
-                    dis[dis >= 1.5] = 2
-                    dis[0.5 <= dis < 1.5] = 1
-                    dis[dis < 0.5] = 0
+                    for it in range(dis.shape[1]):
+                        if dis[0][it] >= 1.5:
+                            dis[0][it] = 2
+                        elif 0.5 <= dis[0][it] < 1.5:
+                            dis[0][it] = 1
+                        elif dis[0][it] < 0.5:
+                            dis[0][it] = 0
                     temp = self.frogs[local_worst] + dis
                     # temp[temp < 0] = 0
                     temp_f = self.get_fitness(temp)
