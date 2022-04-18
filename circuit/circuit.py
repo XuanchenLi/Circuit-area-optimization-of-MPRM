@@ -18,28 +18,29 @@ class BooleanCircuit:
 
     def toMinimum(self):
 
-        Minterm = np.hstack((self.terms, self.outs))
+        Minterm = np.hstack((self.terms, self.outs)).astype(int)
         while True:
             fix_num = 0
             for i in range(self.term_num):
                 # 遍历terms每一项 进行最小项转换
-                minterm = np.array(Minterm[i, :])
+                minterm = np.array(Minterm[i, :].reshape(-1))
                 # position = minterm.where(minterm == -1)
                 position = minterm[minterm == -1]
                 fix = np.array(minterm)
-                if position:
+                if (position==-1).any():
                     fix_num += 1
                     fix[position[0]] = 0
-                    Minterm = np.append(Minterm, fix, axis=0)
+
+                    Minterm = np.append(Minterm, [fix], axis=0)
                     fix[position[0]] = 1
-                    Minterm = np.append(Minterm, fix, axis=0)
+                    Minterm = np.append(Minterm, [fix], axis=0)
                 else:
-                    Minterm = np.append(Minterm, fix, axis=0)
+                    Minterm = np.append(Minterm, [fix], axis=0)
             if fix_num == 0:
                 # 矩阵中不存在-1跳出
                 break
             # 删除
-            Minterm = np.delete(Minterm, np.s_[:self.term_num])
+            Minterm = np.delete(Minterm, np.s_[:self.term_num],axis=0)
             self.term_num = np.shape(Minterm)[0]  # 获取新行数
         # 去重
         unique = np.unique(np.array(Minterm[:, :self.in_num]))

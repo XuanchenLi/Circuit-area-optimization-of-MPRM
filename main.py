@@ -22,7 +22,6 @@ def dp(n, w, p, c):
 
 
 if __name__ == '__main__':
-
     """
     n = 2000
     ans = 0
