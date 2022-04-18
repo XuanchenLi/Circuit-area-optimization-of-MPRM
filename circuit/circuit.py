@@ -18,46 +18,54 @@ class BooleanCircuit:
 
     def toMinimum(self):
 
-        Minterm=np.hstack((self.terms,self.outs))
-        while (True):
+        Minterm = np.hstack((self.terms, self.outs))
+        while True:
             fix_num = 0
             for i in range(self.term_num):
-                #遍历terms每一项 进行最小项转换
+                # 遍历terms每一项 进行最小项转换
                 minterm = np.array(Minterm[i, :])
-                position = minterm.where(minterm==-1)
+                # position = minterm.where(minterm == -1)
+                position = minterm[minterm == -1]
                 fix = np.array(minterm)
                 if position:
                     fix_num += 1
                     fix[position[0]] = 0
-                    Minterm=np.append(Minterm, fix, axis=0)
+                    Minterm = np.append(Minterm, fix, axis=0)
                     fix[position[0]] = 1
-                    Minterm=np.append(Minterm, fix, axis=0)
+                    Minterm = np.append(Minterm, fix, axis=0)
                 else:
-                    Minterm=np.append(Minterm, fix, axis=0)
+                    Minterm = np.append(Minterm, fix, axis=0)
             if fix_num == 0:
                 # 矩阵中不存在-1跳出
                 break
             # 删除
-            Minterm=np.delete(Minterm,np.s_[:self.term_num])
+            Minterm = np.delete(Minterm, np.s_[:self.term_num])
             self.term_num = np.shape(Minterm)[0]  # 获取新行数
-        #去重
-        unique=np.unique(np.array(Minterm[:,:self.in_num]))
-        index=[]
+        # 去重
+        unique = np.unique(np.array(Minterm[:, :self.in_num]))
+        index = []
         for i in range(self.term_num):
-            if (Minterm[i,:self.in_num]==unique[0,:]).all():
-                unique=np.delete(unique,0,index=0)
+            if (Minterm[i, :self.in_num] == unique[0, :]).all():
+                unique = np.delete(unique, 0, index=0)
             else:
                 index.append(i)
-        Minterm=np.delete(Minterm,index,axis=0)
-        self.terms=Minterm[:,:self.in_num]
-        self.outs=Minterm[:,:self.in_num+1:self.in_num+self.outs]
+        Minterm = np.delete(Minterm, index, axis=0)
+        self.terms = Minterm[:, :self.in_num]
+        self.outs = Minterm[:, :self.in_num + 1:self.in_num + self.outs]
 
     def get_area(self):
         return self.term_num
 
 
+def get_polarity_num(polarity):
+    res = 0
+    for i in range(polarity.shape[0]):
+        res = res*3 + polarity[i]
+    return res
+
+
 class MPRM:
-    def __init__(self, in_num, out_num, term_num, polarity, terms=None, outs=None):
+    def __init__(self, in_num=0, out_num=0, term_num=0, polarity=None, terms=None, outs=None):
         self.in_num = in_num
         self.out_num = out_num
         self.term_num = term_num
@@ -65,65 +73,65 @@ class MPRM:
         self.outs = outs
         self.polarity = polarity
 
-    def fromBoolean(self,booleanCircuit, polarity):
+    def fromBoolean(self, booleanCircuit, polarity):
         booleanCircuit.toMinimum()
         l = 1
         k = booleanCircuit.in_num - 1
-        mitrix=np.hstack((booleanCircuit.terms,booleanCircuit.outs))
+        mitrix = np.hstack((booleanCircuit.terms, booleanCircuit.outs))
         for i in range(len(polarity)):
-            #从高到低遍历极性的每一位
+            # 从高到低遍历极性的每一位
 
             for j in range(self.term_num):
-                #对所有行进行操作
-                if polarity[i,0] == 2:
-                    if (self.in_num-i)-1<0:
-                        break;
-                elif polarity[i,0] == 0:
-                    if mitrix[j,i]==0:
+                # 对所有行进行操作
+                if polarity[i, 0] == 2:
+                    if (self.in_num - i) - 1 < 0:
+                        break
+                elif polarity[i, 0] == 0:
+                    if mitrix[j, i] == 0:
                         new = np.array(mitrix[j, :])
                         new[i] = 1
                         new = [new]
 
-                        mitrix=np.append(mitrix,new,axis=0)
+                        mitrix = np.append(mitrix, new, axis=0)
 
-                elif polarity[i,0]==1:
-                    if mitrix[j,i]==1:
+                elif polarity[i, 0] == 1:
+                    if mitrix[j, i] == 1:
                         new = np.array(mitrix[j, :])
                         new[i] = 0
-                        new=[new]
-                        mitrix=np.append(mitrix, new, axis=0)
-            #找相同的行
-            if np.shape(mitrix)[0]!=np.shape(np.unique(np.array(mitrix[:,:self.in_num]),axis=0))[0]:
-              #新行旧行有相同
+                        new = [new]
+                        mitrix = np.append(mitrix, new, axis=0)
+            # 找相同的行
+            if np.shape(mitrix)[0] != np.shape(np.unique(np.array(mitrix[:, :self.in_num]), axis=0))[0]:
+                # 新行旧行有相同
                 index = []
-                for j in range(self.term_num,np.shape(mitrix)[0]):
-                    #枚举新行遍历旧行找到相同一对
+                for j in range(self.term_num, np.shape(mitrix)[0]):
+                    # 枚举新行遍历旧行找到相同一对
                     for k in range(self.term_num):
-                        if (mitrix[j,:self.in_num]==self.terms[k,:]).all():
-                            #相同的新旧行o值异或
-                            bits=0
-                            for n in range(self.in_num,self.in_num+self.out_num):
-                                #计算所有o值
-                                bit = mitrix[k,n]^mitrix[j,n]
-                                bits+=bit
-                                #修改旧行的o值 新行为相同行后续删除
-                                mitrix[k,n]=bit
-                            if bits==0:
-                                #o 值都为0删除
+                        if (mitrix[j, :self.in_num] == self.terms[k, :]).all():
+                            # 相同的新旧行o值异或
+                            bits = 0
+                            for n in range(self.in_num, self.in_num + self.out_num):
+                                # 计算所有o值
+                                bit = mitrix[k, n] ^ mitrix[j, n]
+                                bits += bit
+                                # 修改旧行的o值 新行为相同行后续删除
+                                mitrix[k, n] = bit
+                            if bits == 0:
+                                # o 值都为0删除
                                 index.append(k)
-                            #重复新行下标加入
+                            # 重复新行下标加入
                             index.append(j)
-                #查找结束
-                #删除重复新行
-                mitrix=np.delete(mitrix,index,axis=0)
-            if polarity[i,0]==1:
-                #ik取反
-                mitrix[:,i]=-(mitrix[:,i]-1)
+                # 查找结束
+                # 删除重复新行
+                mitrix = np.delete(mitrix, index, axis=0)
+            if polarity[i, 0] == 1:
+                # ik取反
+                mitrix[:, i] = -(mitrix[:, i] - 1)
             print(mitrix)
             self.term_num = np.shape(mitrix)[0]
-            self.terms=mitrix[:self.term_num,:self.in_num]
+            self.terms = mitrix[:self.term_num, :self.in_num]
+            self.outs = mitrix[:self.term_num, self.in_num:]
             print("\n")
-
 
     def turnTo(self, polarity):
         Q = get_xor(self.polarity, polarity)
@@ -195,8 +203,5 @@ class MPRM:
                 self.outs = np.concatenate((self.outs, new_outs[i].reshape(1, -1)))
                 self.term_num += 1
 
-        def get_area(self):
-            return self.term_num
-
-
-
+    def get_area(self):
+        return self.term_num

@@ -1,5 +1,6 @@
 import numpy as np
 from greedy_frog import GreedyFrog
+from mprm_frog import JumpFrog
 import time
 import os
 from circuit.pla_parser import Parser
@@ -10,7 +11,7 @@ def test(inputs, w, limits):
     return np.mat(inputs) * np.mat(w).T <= limits
 
 
-def dp(w, p, c):
+def dp(n, w, p, c):
     f = [[0 for i in range(c + 1)] for i in range(n + 1)]  # 初始化
     for i in range(1, n + 1):
         for j in range(0, c + 1):
@@ -22,6 +23,7 @@ def dp(w, p, c):
 
 if __name__ == '__main__':
 
+    """
     n = 2000
     ans = 0
     best = 0
@@ -48,11 +50,33 @@ if __name__ == '__main__':
     time_end2 = time.time()
     print('time cost', (time_end2 - time_start2) / 5.0, 's')
     """
-    """
+
     parser = Parser("dataset/mcnc")
     files = os.listdir("dataset/mcnc")
     for f in files:
-        res = parser.parse(f)
+        ans = 0
+        best = 0
+        bool_c = parser.parse(f)
+        mprm = MPRM()
+        nill = np.zeros((1, bool_c.in_num))
+        mprm.fromBoolean(bool_c, nill)
+        time_start2 = time.time()
+        for i in range(5):
+            model = JumpFrog(20, 5, mprm)
+            model.init()
+            res = model.train(5)
+            print(res[1])
+            ans = ans + res[1]
+            if res[1] > best:
+                best = res[1]
+        print("best: ", best)
+        print("ave: ", ans / 5.0)
+        time_end2 = time.time()
+        print('time cost', (time_end2 - time_start2) / 5.0, 's')
+
+
+
+
 
 
 
