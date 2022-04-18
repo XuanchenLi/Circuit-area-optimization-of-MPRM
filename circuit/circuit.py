@@ -25,6 +25,7 @@ class BooleanCircuit:
                 #遍历terms每一项 进行最小项转换
                 minterm = np.array(Minterm[i, :])
                 position = minterm.where(minterm==-1)
+
                 fix = np.array(minterm)
                 if position:
                     fix_num += 1
