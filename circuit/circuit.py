@@ -146,7 +146,6 @@ class MPRM:
             self.term_num = np.shape(mitrix)[0]
             self.terms = mitrix[:self.term_num, :self.in_num]
             self.outs = mitrix[:self.term_num, self.in_num:]
-            print("\n")
 
     def turnTo(self, polarity):
         Q = get_xor(self.polarity, polarity)

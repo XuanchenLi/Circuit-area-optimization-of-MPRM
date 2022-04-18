@@ -29,7 +29,7 @@ class JumpFrog:
         for i in range(frogs.shape[0]):
             res.append(self.get_one_fitness(frogs[i]))
         res = np.array(res).reshape((frogs.shape[0], -1))
-        return res
+        return -res
 
     def get_one_fitness(self, frog):
         num = get_polarity_num(frog)
@@ -49,6 +49,7 @@ class JumpFrog:
     def evolve(self, iterator_times):
         global_best = self.groups[0][0]
         for i in range(self.group_num):
+            print("e", i)
             for iter in range(iterator_times):
                 local_best = self.groups[i][0]
                 local_worst = self.groups[i][self.meme_size - 1]
@@ -102,11 +103,12 @@ class JumpFrog:
         cur_t = 0
         global_best = []
         for i in range(times):
+            print("t", i)
             self.fitness = self.get_fitness(self.frogs)
             self.sort()
             self.grouping()
             global_best = self.frogs[self.groups[0][0]]
-            new_best = self.evolve(15)
+            new_best = self.evolve(5)
             # print(i, ":", self.fitness[new_best])
             if self.get_fitness(global_best) >= self.fitness[new_best]:
                 cur_t += 1
@@ -115,5 +117,6 @@ class JumpFrog:
             else:
                 cur_t = 0
                 global_best = self.frogs[new_best]
+            print("t", -self.get_fitness(global_best))
         # print(test(self.frogs[global_best], self.weights, self.limitation))
         return global_best, self.get_fitness(global_best)

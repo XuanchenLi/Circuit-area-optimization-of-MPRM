@@ -50,8 +50,8 @@ if __name__ == '__main__':
     print('time cost', (time_end2 - time_start2) / 5.0, 's')
 
     """
-    parser = Parser("dataset/mcnc")
-    files = os.listdir("dataset/mcnc")
+    parser = Parser("dataset/mcnc2")
+    files = os.listdir("dataset/mcnc2")
     for f in files:
         ans = 0
         best = 0
@@ -61,12 +61,13 @@ if __name__ == '__main__':
         mprm.fromBoolean(bool_c, nill)
         time_start2 = time.time()
         for i in range(5):
+            print("m", i)
             model = JumpFrog(20, 5, mprm)
             model.init()
             res = model.train(5)
-            print(res[1])
+            print(-res[1])
             ans = ans + res[1]
-            if res[1] > best:
+            if res[1] < best:
                 best = res[1]
         print("best: ", best)
         print("ave: ", ans / 5.0)

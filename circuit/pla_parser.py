@@ -48,7 +48,7 @@ class Parser:
                             else:
                                 terms[cnt][i] = -1
                         for i in range(out_num):
-                            if out[i] == '0':
+                            if out[i] == '0' or out[i] == '~':
                                 outs[cnt][i] = 0
                             elif out[i] == '1':
                                 outs[cnt][i] = 1
@@ -71,7 +71,7 @@ class Parser:
                     else:
                         terms[s][i] = -1
                 for i in range(out_num):
-                    if s_outs[s][i] == '0':
+                    if s_outs[s][i] == '0' or s_outs[i] == '~':
                         outs[s][i] = 0
                     elif s_outs[s][i] == '1':
                         outs[s][i] = 1
