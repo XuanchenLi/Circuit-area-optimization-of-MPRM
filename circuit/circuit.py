@@ -83,6 +83,8 @@ class MPRM:
 
     def fromBoolean(self, booleanCircuit, polarity):
         booleanCircuit.toMinimum()
+        self.in_num = booleanCircuit.in_num
+        self.polarity = polarity
         l = 1
         k = booleanCircuit.in_num - 1
         mitrix = np.hstack((booleanCircuit.terms, booleanCircuit.outs))

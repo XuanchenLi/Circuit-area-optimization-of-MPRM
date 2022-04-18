@@ -57,7 +57,7 @@ if __name__ == '__main__':
         best = 0
         bool_c = parser.parse(f)
         mprm = MPRM()
-        nill = np.zeros((1, bool_c.in_num))
+        nill = np.zeros((1, bool_c.in_num))[0]
         mprm.fromBoolean(bool_c, nill)
         time_start2 = time.time()
         for i in range(5):
