@@ -2,6 +2,8 @@ import numpy as np
 
 
 def get_xor(p1, p2):
+    p1 = p1.astype(int)
+    p2 = p2.astype(int)
     q = np.zeros(p1.shape)
     for i in range(p1.shape[0]):
         q[i] = (p1[i] ^ p2[i])
@@ -88,15 +90,16 @@ class MPRM:
         l = 1
         k = booleanCircuit.in_num - 1
         mitrix = np.hstack((booleanCircuit.terms, booleanCircuit.outs))
+        polarity=polarity.astype(int)
         for i in range(len(polarity)):
             # 从高到低遍历极性的每一位
 
             for j in range(self.term_num):
                 # 对所有行进行操作
-                if polarity[i, 0] == 2:
+                if polarity[i] == 2:
                     if (self.in_num - i) - 1 < 0:
                         break
-                elif polarity[i, 0] == 0:
+                elif polarity[i] == 0:
                     if mitrix[j, i] == 0:
                         new = np.array(mitrix[j, :])
                         new[i] = 1
@@ -104,7 +107,7 @@ class MPRM:
 
                         mitrix = np.append(mitrix, new, axis=0)
 
-                elif polarity[i, 0] == 1:
+                elif polarity[i] == 1:
                     if mitrix[j, i] == 1:
                         new = np.array(mitrix[j, :])
                         new[i] = 0
@@ -134,10 +137,10 @@ class MPRM:
                 # 查找结束
                 # 删除重复新行
                 mitrix = np.delete(mitrix, index, axis=0)
-            if polarity[i, 0] == 1:
+            if polarity[i] == 1:
                 # ik取反
                 mitrix[:, i] = -(mitrix[:, i] - 1)
-            print(mitrix)
+            #print(mitrix)
             self.term_num = np.shape(mitrix)[0]
             self.terms = mitrix[:self.term_num, :self.in_num]
             self.outs = mitrix[:self.term_num, self.in_num:]
