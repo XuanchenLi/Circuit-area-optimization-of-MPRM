@@ -21,36 +21,24 @@ def dp(n, w, p, c):
     return f[n][c]
 
 
-if __name__ == '__main__':
-    """
-    n = 5000
-    ans = 0
-    best = 0
+def enu(file):
+    parser = Parser("dataset/mcnc2")
+    bool_c = parser.parse(file)
+    mprm = MPRM()
+    nill = np.zeros((1, bool_c.in_num))[0]
+    mprm.fromBoolean2(bool_c, nill)
+    mina = 2 ** mprm.in_num
+    for pp in range(3 ** mprm.in_num):
+        nill = num_to_polarity(pp, mprm.in_num)
+        mprm.turnTo(nill)
+        if mina > mprm.get_area():
+            mina = mprm.get_area()
+        print(nill, mprm.get_area())
+        # print(mprm.terms)
+    print(mina)
 
-    w = np.random.randint(1, 10, (1, n))
-    p = np.random.randint(1, 15, (1, n))
-    c = int(np.sum(w) / 2)
-    time_start1 = time.time()
-    print("ground truth: ", dp(n, w, p, c))
-    time_end1 = time.time()
-    print('time cost', time_end1 - time_start1, 's')
 
-    time_start2 = time.time()
-    for i in range(5):
-        model = GreedyFrog(20, 5, w, p, c)
-        model.init()
-        res = model.train(20)
-        print(res[1])
-        ans = ans + res[1]
-        if res[1] > best:
-            best = res[1]
-    print("best: ", best)
-    print("ave: ", ans / 5.0)
-    time_end2 = time.time()
-    print('time cost', (time_end2 - time_start2) / 5.0, 's')
-
-    """
-    """
+def tests():
     testi = np.array([
         [0, 0, 1],
         [0, 1, 0],
@@ -75,8 +63,39 @@ if __name__ == '__main__':
     # print(M1.terms, M1.outs)
     M1.turnTo(np.array([0, 0, 0]))
     print(M1.terms, M1.outs)
+
+
+def pack():
+    n = 5000
+    ans = 0
+    best = 0
+    w = np.random.randint(1, 10, (1, n))
+    p = np.random.randint(1, 15, (1, n))
+    c = int(np.sum(w) / 2)
+    time_start1 = time.time()
+    print("ground truth: ", dp(n, w, p, c))
+    time_end1 = time.time()
+    print('time cost', time_end1 - time_start1, 's')
+
+    time_start2 = time.time()
+    for i in range(5):
+        model = GreedyFrog(20, 5, w, p, c)
+        model.init()
+        res = model.train(20)
+        print(res[1])
+        ans = ans + res[1]
+        if res[1] > best:
+            best = res[1]
+    print("best: ", best)
+    print("ave: ", ans / 5.0)
+    time_end2 = time.time()
+    print('time cost', (time_end2 - time_start2) / 5.0, 's')
+
+
+if __name__ == '__main__':
+    tests()
     os.system("pause")
-    """
+
     parser = Parser("dataset/mcnc2")
     files = os.listdir("dataset/mcnc2")
     for f in files:
@@ -84,7 +103,7 @@ if __name__ == '__main__':
         bool_c = parser.parse(f)
         best = 2**bool_c.in_num
         mprm = MPRM()
-        nill = np.ones((1, bool_c.in_num))[0]
+        nill = np.zeros((1, bool_c.in_num))[0]
         mprm.fromBoolean2(bool_c, nill)
         """
         mina = 2**mprm.in_num
@@ -97,6 +116,7 @@ if __name__ == '__main__':
             print(nill, mprm.get_area())
         print(mina)
         os.system("pause")
+        """
         """
         time_start2 = time.time()
         for i in range(4):
@@ -113,7 +133,7 @@ if __name__ == '__main__':
         print(f, "ave: ", -ans / 4.0)
         time_end2 = time.time()
         print('time cost', (time_end2 - time_start2) / 4.0, 's')
-
+        """
 
 
 

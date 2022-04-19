@@ -32,7 +32,7 @@ class Parser:
                         term_num = int(line[3:])
                         terms = np.zeros((term_num, in_num))
                         outs = np.zeros((term_num, out_num))
-                elif line[0] == '1' or line[0] == '0' or line[0] == '-':
+                elif line[0] == '1' or line[0] == '0' or line[0] == '-' or line[0] == '~':
                     if term_num == 0:
                         flag = True
                         s_terms.append(line[:in_num])
@@ -48,12 +48,10 @@ class Parser:
                             else:
                                 terms[cnt][i] = -1
                         for i in range(out_num):
-                            if out[i] == '0' or out[i] == '~':
+                            if out[i] == '0' or out[i] == '~' or out[i] == '-':
                                 outs[cnt][i] = 0
                             elif out[i] == '1':
                                 outs[cnt][i] = 1
-                            else:
-                                outs[cnt][i] = -1
                     cnt += 1
             else:
                 break
@@ -71,11 +69,9 @@ class Parser:
                     else:
                         terms[s][i] = -1
                 for i in range(out_num):
-                    if s_outs[s][i] == '0' or s_outs[i] == '~':
+                    if s_outs[s][i] == '0' or s_outs[i] == '~' or s_outs[i] == '-':
                         outs[s][i] = 0
                     elif s_outs[s][i] == '1':
                         outs[s][i] = 1
-                    else:
-                        outs[s][i] = -1
         return BooleanCircuit(in_num, out_num, term_num, terms, outs)
 

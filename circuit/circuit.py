@@ -54,7 +54,7 @@ class BooleanCircuit:
                 unique = np.delete(unique, 0, axis=0)
             else:
                 for j in range(i):
-                    #解决最小项相同但出现位置不同的情况
+                    # 解决最小项相同但出现位置不同的情况
                     if(Minterm[j,:self.in_num]==Minterm[i,:self.in_num]).all():
                         Minterm[i,self.in_num:]+=Minterm[j,self.in_num:]
                         temp=Minterm[i,self.in_num:]
@@ -281,7 +281,7 @@ class MPRM:
                         de[i] = 1
                         break
                     else:
-                        self.outs[j] = os
+                        self.outs[j] = os.copy()
                         de[i] = 1
                         break
         for i in range(new_terms.shape[0]):
