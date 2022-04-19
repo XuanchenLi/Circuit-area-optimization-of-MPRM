@@ -19,16 +19,15 @@ class BooleanCircuit:
         self.outs = outs
 
     def toMinimum(self):
-
         Minterm = np.hstack((self.terms, self.outs)).astype(int)
         while True:
             fix_num = 0
             for i in range(self.term_num):
                 # 遍历terms每一项 进行最小项转换
                 minterm = np.array(Minterm[i, :].reshape(-1))
-                position = np.where(minterm == -1)
+                position = np.where(minterm == -1)[0].reshape(1, -1)
                 fix = np.array(minterm)
-                if np.shape(position)[1]!=0:
+                if np.shape(position)[1] != 0:
                     fix_num += 1
                     fix[position[0]] = 0
 
@@ -40,17 +39,17 @@ class BooleanCircuit:
             if fix_num == 0:
                 # 矩阵中不存在-1跳出
                 break
-            # 删除
-            Minterm = np.delete(Minterm, np.s_[:self.term_num],axis=0)
+            # 删除上一轮
+            Minterm = np.delete(Minterm, np.s_[:self.term_num], axis=0)
             self.term_num = np.shape(Minterm)[0]  # 获取新行数
         # 去重
-        Minterm=np.unique(Minterm,axis=0)
-        self.term_num=np.shape(Minterm)[0]
-        unique = np.unique(np.array(Minterm[:, :self.in_num]),axis=0)
+        Minterm = np.unique(Minterm, axis=0)
+        self.term_num = np.shape(Minterm)[0]
+        unique = np.unique(np.array(Minterm[:, :self.in_num]), axis=0)
         index = []
         for i in range(self.term_num):
 
-            if np.shape(unique)[0]!=0 and (Minterm[i, :self.in_num] == unique[0, :]).all():
+            if np.shape(unique)[0] != 0 and (Minterm[i, :self.in_num] == unique[0, :]).all():
                 unique = np.delete(unique, 0, axis=0)
             else:
                 for j in range(i):
@@ -65,6 +64,7 @@ class BooleanCircuit:
         self.terms = Minterm[:, :self.in_num]
         self.outs = Minterm[:, self.in_num :self.in_num + self.out_num]
         self.term_num = self.terms.shape[0]
+        print(self.terms, self.outs)
         print("最小项个数")
         print(self.term_num)
 

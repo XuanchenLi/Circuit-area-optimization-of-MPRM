@@ -39,6 +39,24 @@ def enu(file):
 
 
 def tests():
+    bti = np.array(
+        [[1, 1, -1],
+        [-1, 1, 1],
+        [1, -1, 1],
+        [1, 0, 0],
+        [1, 1, 1],
+        [0, 1, 0],
+        [0, 0, 1]]
+    )
+    bto = np.array(
+        [[1, 0],
+        [1, 0],
+        [1, 0],
+        [0, 1],
+        [0, 1],
+        [0, 1],
+        [0, 1]]
+    )
     testi = np.array([
         [0, 0, 1],
         [0, 1, 0],
@@ -57,10 +75,10 @@ def tests():
         [0, 1],
         [1, 1]
     ])
-    B1 = BooleanCircuit(3, 2, 7, testi, testo)
+    B1 = BooleanCircuit(3, 2, 7, bti, bto)
     M1 = MPRM()
     M1.fromBoolean2(B1, np.array([2, 1, 0]))
-    # print(M1.terms, M1.outs)
+    print(M1.terms, M1.outs)
     M1.turnTo(np.array([0, 0, 0]))
     print(M1.terms, M1.outs)
 
