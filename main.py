@@ -72,6 +72,8 @@ if __name__ == '__main__':
     B1 = BooleanCircuit(3, 2, 7, testi, testo)
     M1 = MPRM()
     M1.fromBoolean2(B1, np.array([2, 1, 0]))
+    # print(M1.terms, M1.outs)
+    M1.turnTo(np.array([0, 0, 0]))
     print(M1.terms, M1.outs)
     os.system("pause")
     """
@@ -82,23 +84,35 @@ if __name__ == '__main__':
         bool_c = parser.parse(f)
         best = 2**bool_c.in_num
         mprm = MPRM()
-        nill = np.zeros((1, bool_c.in_num))[0]
+        nill = np.ones((1, bool_c.in_num))[0]
         mprm.fromBoolean2(bool_c, nill)
+        """
+        mina = 2**mprm.in_num
+        for pp in range(3**mprm.in_num):
+            nill = num_to_polarity(pp, mprm.in_num)
+            print(nill)
+            mprm.turnTo(nill)
+            if mina > mprm.get_area():
+                mina = mprm.get_area()
+            print(nill, mprm.get_area())
+        print(mina)
+        os.system("pause")
+        """
         time_start2 = time.time()
-        for i in range(5):
-            print("m", i)
+        for i in range(4):
+            # print("m", i)
             model = JumpFrog(20, 5, mprm)
             model.init()
-            res = model.train(1)
+            res = model.train(3)
             print(-res[1], best)
             ans = ans + res[1]
             if -res[1] < best:
                 best = -res[1]
             mprm.turnTo(nill)
-        print("best: ", best)
-        print("ave: ", ans / 5.0)
+        print(f, "best: ", best)
+        print(f, "ave: ", -ans / 4.0)
         time_end2 = time.time()
-        print('time cost', (time_end2 - time_start2) / 5.0, 's')
+        print('time cost', (time_end2 - time_start2) / 4.0, 's')
 
 
 

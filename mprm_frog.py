@@ -37,7 +37,7 @@ class JumpFrog:
             return self.dic.get(num)
         self.mprm.turnTo(frog)
         self.dic[num] = self.mprm.get_area()
-        print("one", num, self.dic[num])
+        # print("one", num, self.dic[num])
         return self.dic[num]
 
     def sort(self):
@@ -50,7 +50,7 @@ class JumpFrog:
     def evolve(self, iterator_times):
         global_best = self.groups[0][0]
         for i in range(self.group_num):
-            print("e", i)
+            # print("e", i)
             for iter in range(iterator_times):
                 local_best = self.groups[i][0]
                 local_worst = self.groups[i][self.meme_size - 1]
@@ -104,7 +104,7 @@ class JumpFrog:
         cur_t = 0
         global_best = []
         for i in range(times):
-            print("t", i)
+            # print("t", i)
             self.fitness = self.get_fitness(self.frogs)
             self.sort()
             self.grouping()
@@ -118,6 +118,6 @@ class JumpFrog:
             else:
                 cur_t = 0
                 global_best = self.frogs[new_best]
-            print("t", -self.get_fitness(global_best))
+            # print("t", -self.get_fitness(global_best))
         # print(test(self.frogs[global_best], self.weights, self.limitation))
         return global_best, self.get_fitness(global_best)
