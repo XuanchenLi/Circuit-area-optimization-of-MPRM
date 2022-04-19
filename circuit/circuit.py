@@ -46,9 +46,19 @@ class BooleanCircuit:
         Minterm = np.unique(Minterm, axis=0)
         self.term_num = np.shape(Minterm)[0]
         unique = np.unique(np.array(Minterm[:, :self.in_num]), axis=0)
-        index = []
+        outs = np.zeros((unique.shape[0], self.out_num))
+        for tt in range(unique.shape[0]):
+            for kk in range(Minterm.shape[0]):
+                if np.array_equal(unique[tt], Minterm[kk, :self.in_num]):
+                    outs[tt] += Minterm[kk, self.in_num:]
+            for pp in range(self.out_num):
+                if outs[tt][pp] > 1:
+                    outs[tt][pp] = 1
+        self.terms = unique
+        self.outs = outs
+        self.term_num = unique.shape[0]
+        """
         for i in range(self.term_num):
-
             if np.shape(unique)[0] != 0 and (Minterm[i, :self.in_num] == unique[0, :]).all():
                 unique = np.delete(unique, 0, axis=0)
             else:
@@ -64,6 +74,7 @@ class BooleanCircuit:
         self.terms = Minterm[:, :self.in_num]
         self.outs = Minterm[:, self.in_num :self.in_num + self.out_num]
         self.term_num = self.terms.shape[0]
+        """
         print(self.terms, self.outs)
         print("最小项个数")
         print(self.term_num)
