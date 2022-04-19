@@ -37,6 +37,7 @@ class JumpFrog:
             return self.dic.get(num)
         self.mprm.turnTo(frog)
         self.dic[num] = self.mprm.get_area()
+        print("one", num, self.dic[num])
         return self.dic[num]
 
     def sort(self):

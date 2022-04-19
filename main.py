@@ -50,25 +50,51 @@ if __name__ == '__main__':
     print('time cost', (time_end2 - time_start2) / 5.0, 's')
 
     """
+    """
+    testi = np.array([
+        [0, 0, 1],
+        [0, 1, 0],
+        [0, 1, 1],
+        [1, 0, 0],
+        [1, 0, 1],
+        [1, 1, 0],
+        [1, 1, 1]
+    ])
+    testo = np.array([
+        [1, 0],
+        [1, 0],
+        [0, 1],
+        [1, 0],
+        [0, 1],
+        [0, 1],
+        [1, 1]
+    ])
+    B1 = BooleanCircuit(3, 2, 7, testi, testo)
+    M1 = MPRM()
+    M1.fromBoolean2(B1, np.array([2, 1, 0]))
+    print(M1.terms, M1.outs)
+    os.system("pause")
+    """
     parser = Parser("dataset/mcnc2")
     files = os.listdir("dataset/mcnc2")
     for f in files:
         ans = 0
-        best = 0
         bool_c = parser.parse(f)
+        best = 2**bool_c.in_num
         mprm = MPRM()
         nill = np.zeros((1, bool_c.in_num))[0]
-        mprm.fromBoolean(bool_c, nill)
+        mprm.fromBoolean2(bool_c, nill)
         time_start2 = time.time()
         for i in range(5):
             print("m", i)
             model = JumpFrog(20, 5, mprm)
             model.init()
             res = model.train(1)
-            print(-res[1])
+            print(-res[1], best)
             ans = ans + res[1]
-            if res[1] < best:
-                best = res[1]
+            if -res[1] < best:
+                best = -res[1]
+            mprm.turnTo(nill)
         print("best: ", best)
         print("ave: ", ans / 5.0)
         time_end2 = time.time()

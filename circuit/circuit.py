@@ -91,16 +91,17 @@ class MPRM:
         self.polarity = polarity
 
     def fromBoolean(self, booleanCircuit, polarity):
+        # print(booleanCircuit.terms)
         booleanCircuit.toMinimum()
+        # print(booleanCircuit.terms)
         self.in_num = booleanCircuit.in_num
         self.polarity = polarity
         l = 1
         k = booleanCircuit.in_num - 1
         mitrix = np.hstack((booleanCircuit.terms, booleanCircuit.outs))
-        polarity=polarity.astype(int)
+        polarity = polarity.astype(int)
         for i in range(len(polarity)):
             # 从高到低遍历极性的每一位
-
             for j in range(self.term_num):
                 # 对所有行进行操作
                 if polarity[i] == 2:
@@ -111,7 +112,6 @@ class MPRM:
                         new = np.array(mitrix[j, :])
                         new[i] = 1
                         new = [new]
-
                         mitrix = np.append(mitrix, new, axis=0)
 
                 elif polarity[i] == 1:
@@ -152,6 +152,51 @@ class MPRM:
             self.terms = mitrix[:self.term_num, :self.in_num]
             self.outs = mitrix[:self.term_num, self.in_num:]
 
+    def fromBoolean2(self, booleanCircuit, polarity):
+        # booleanCircuit.toMinimum()
+        Q = polarity
+        l = 0
+        k = 0
+        new_terms = []
+        new_outs = []
+        self.terms = booleanCircuit.terms
+        self.outs = booleanCircuit.outs
+        self.in_num = booleanCircuit.in_num
+        self.term_num = booleanCircuit.term_num
+        self.polarity = polarity
+        while True:
+            # S2
+            if Q[k] != 2:
+                if Q[k] == 0 and self.terms[l][k] == 0:
+                    new_t = self.terms[l].copy()
+                    new_t[k] = 1
+                    new_o = self.outs[l].copy()
+                    new_terms.append(new_t)
+                    new_outs.append(new_o)
+                elif Q[k] == 1 and self.terms[l][k] == 1:
+                    new_t = self.terms[l].copy()
+                    new_t[k] = 0
+                    new_o = self.outs[l].copy()
+                    new_terms.append(new_t)
+                    new_outs.append(new_o)
+                # S3
+                l = l + 1
+                if l < self.term_num:
+                    continue  # 转S2
+                # S4 S5
+                # print("new", new_terms, new_outs)
+                self.merge(np.vstack(new_terms), np.vstack(new_outs))
+                if Q[k] == 1:
+                    for jj in range(self.terms.shape[0]):
+                        self.terms[jj][k] = 1 ^ self.terms[jj][k]
+                new_terms = []
+                new_outs = []
+            # S6
+            l = 0
+            k = k + 1
+            if k >= self.in_num:
+                break
+
     def turnTo(self, polarity):
         Q = get_xor(self.polarity, polarity)
         l = 0
@@ -191,6 +236,9 @@ class MPRM:
                     continue  # 转S2
                 # S4 S5
                 self.merge(np.vstack(new_terms), np.vstack(new_outs))
+                if Q[k] == 3:
+                    for jj in range(self.terms.shape[0]):
+                        self.terms[jj][k] = 1^self.terms[jj][k]
                 new_terms = []
                 new_outs = []
             # S6
@@ -201,6 +249,8 @@ class MPRM:
         self.polarity = polarity
 
     def merge(self, new_terms, new_outs):
+        if new_outs is None:
+            return
         de = np.zeros(new_terms.shape[0])
         for i in range(new_terms.shape[0]):
             for j in range(self.term_num):
@@ -221,6 +271,7 @@ class MPRM:
                 self.terms = np.concatenate((self.terms, new_terms[i].reshape(1, -1)))
                 self.outs = np.concatenate((self.outs, new_outs[i].reshape(1, -1)))
                 self.term_num += 1
+        # print("kk", self.terms, self.outs)
 
     def get_area(self):
         return self.term_num
