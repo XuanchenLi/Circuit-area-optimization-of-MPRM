@@ -24,6 +24,7 @@ def dp(n, w, p, c):
 def enu(file):
     parser = Parser("dataset/mcnc2")
     bool_c = parser.parse(file)
+    # print(bool_c.terms, bool_c.outs)
     mprm = MPRM()
     nill = np.zeros((1, bool_c.in_num))[0]
     mprm.fromBoolean2(bool_c, nill)
@@ -111,11 +112,10 @@ def pack():
 
 
 if __name__ == '__main__':
-    tests()
-    os.system("pause")
 
     parser = Parser("dataset/mcnc2")
     files = os.listdir("dataset/mcnc2")
+    files = ['sqrt8.pla', 'rd73.pla', 'rd84.pla', 'sao2.pla', 'apex4.pla']
     for f in files:
         ans = 0
         bool_c = parser.parse(f)
@@ -129,29 +129,29 @@ if __name__ == '__main__':
             nill = num_to_polarity(pp, mprm.in_num)
             print(nill)
             mprm.turnTo(nill)
-            if mina > mprm.get_area():
-                mina = mprm.get_area()
+                if mina > mprm.get_area():
+                    mina = mprm.get_area()
             print(nill, mprm.get_area())
         print(mina)
         os.system("pause")
         """
-        """
+
         time_start2 = time.time()
         for i in range(4):
             # print("m", i)
             model = JumpFrog(20, 5, mprm)
             model.init()
-            res = model.train(3)
-            print(-res[1], best)
-            ans = ans + res[1]
-            if -res[1] < best:
-                best = -res[1]
+            gb, res = model.train(10)
+            print(-res, best)
+            ans = ans + res
+            if -res < best:
+                best = -res
             mprm.turnTo(nill)
         print(f, "best: ", best)
         print(f, "ave: ", -ans / 4.0)
         time_end2 = time.time()
         print('time cost', (time_end2 - time_start2) / 4.0, 's')
-        """
+
 
 
 
