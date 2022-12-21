@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="33209447-7a9c-4569-8d65-e366f07efcc8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/dataset/mcnc2/clpl.pla" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataset/mcnc2/newcond.pla" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/circuit/circuit.py" beforeDir="false" afterPath="$PROJECT_DIR$/circuit/circuit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/circuit/pla_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/circuit/pla_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/greedy_frog.py" beforeDir="false" afterPath="$PROJECT_DIR$/greedy_frog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mprm_frog.py" beforeDir="false" afterPath="$PROJECT_DIR$/mprm_frog.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="27B65mGezCvcmaXbnpejDv6Lc6b" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\pythons\GFrog\dataset\mcnc2" />
+      <recent name="D:\pythons\GFrog\dataset\mcnc" />
+      <recent name="D:\pythons\GFrog\dataset\small" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\pythons\GFrog\dataset\mcnc2" />
+      <recent name="D:\pythons\GFrog\dataset\small" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="GFrog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="33209447-7a9c-4569-8d65-e366f07efcc8" name="Default Changelist" comment="" />
+      <created>1648780950724</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648780950724</updated>
+      <workItem from="1648780952145" duration="3978000" />
+      <workItem from="1648793398457" duration="6856000" />
+      <workItem from="1649248136917" duration="113000" />
+      <workItem from="1649319552677" duration="8312000" />
+      <workItem from="1649336260235" duration="9109000" />
+      <workItem from="1649376684807" duration="9495000" />
+      <workItem from="1649925332595" duration="11738000" />
+      <workItem from="1649943035778" duration="5424000" />
+      <workItem from="1649949152120" duration="860000" />
+      <workItem from="1649985718053" duration="6818000" />
+      <workItem from="1650255225156" duration="9005000" />
+      <workItem from="1650280333716" duration="357000" />
+      <workItem from="1650280703478" duration="472000" />
+      <workItem from="1650281190948" duration="7142000" />
+      <workItem from="1650289600579" duration="232000" />
+      <workItem from="1650289843690" duration="6735000" />
+      <workItem from="1650296655933" duration="402000" />
+      <workItem from="1650298202354" duration="129000" />
+      <workItem from="1650298342209" duration="536000" />
+      <workItem from="1650332073098" duration="28696000" />
+      <workItem from="1650381174060" duration="36130000" />
+      <workItem from="1650527111789" duration="4665000" />
+      <workItem from="1650541284710" duration="6782000" />
+      <workItem from="1650866406346" duration="150000" />
+      <workItem from="1671633787591" duration="43000" />
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <created>1649325634622</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649325634622</updated>
+    </task>
+    <task id="LOCAL-00002" summary="optimize">
+      <created>1649345001887</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649345001887</updated>
+    </task>
+    <task id="LOCAL-00003" summary="optimize">
+      <created>1649388412425</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1649388412425</updated>
+    </task>
+    <task id="LOCAL-00004" summary="optimize">
+      <created>1649389029346</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649389029346</updated>
+    </task>
+    <task id="LOCAL-00005" summary="optimize">
+      <created>1649389042390</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649389042390</updated>
+    </task>
+    <task id="LOCAL-00006" summary="optimize">
+      <created>1649925488516</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649925488516</updated>
+    </task>
+    <task id="LOCAL-00007" summary="pla parser">
+      <created>1649937059591</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1649937059591</updated>
+    </task>
+    <task id="LOCAL-00008" summary="MPRM">
+      <created>1649939587396</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1649939587396</updated>
+    </task>
+    <task id="LOCAL-00009" summary="MPRM">
+      <created>1649941690239</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1649941690239</updated>
+    </task>
+    <task id="LOCAL-00010" summary="MPRM">
+      <created>1649942282003</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1649942282003</updated>
+    </task>
+    <task id="LOCAL-00011" summary="MPRM">
+      <created>1649943287016</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649943287016</updated>
+    </task>
+    <task id="LOCAL-00012" summary="MPRM">
+      <created>1649949062778</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1649949062778</updated>
+    </task>
+    <task id="LOCAL-00013" summary="极性间转换">
+      <created>1649990973575</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1649990973575</updated>
+    </task>
+    <task id="LOCAL-00014" summary="极性间转换">
+      <created>1649991654876</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1649991654876</updated>
+    </task>
+    <task id="LOCAL-00015" summary="极性间转换">
+      <created>1650267414931</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1650267414931</updated>
+    </task>
+    <task id="LOCAL-00016" summary=".">
+      <created>1650271969605</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1650271969605</updated>
+    </task>
+    <task id="LOCAL-00017" summary=".">
+      <created>1650280569820</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1650280569820</updated>
+    </task>
+    <task id="LOCAL-00018" summary=".">
+      <created>1650281857824</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1650281857824</updated>
+    </task>
+    <task id="LOCAL-00019" summary=".">
+      <created>1650291285386</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1650291285386</updated>
+    </task>
+    <task id="LOCAL-00020" summary=".">
+      <created>1650292507311</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1650292507311</updated>
+    </task>
+    <task id="LOCAL-00021" summary=".">
+      <created>1650294230479</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1650294230479</updated>
+    </task>
+    <task id="LOCAL-00022" summary=".">
+      <created>1650296581061</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1650296581061</updated>
+    </task>
+    <task id="LOCAL-00023" summary="bug">
+      <created>1650336143649</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1650336143649</updated>
+    </task>
+    <task id="LOCAL-00024" summary=".">
+      <created>1650349617199</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1650349617199</updated>
+    </task>
+    <task id="LOCAL-00025" summary=".">
+      <created>1650356794967</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1650356794967</updated>
+    </task>
+    <task id="LOCAL-00026" summary=".">
+      <created>1650359296643</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1650359296643</updated>
+    </task>
+    <task id="LOCAL-00027" summary=".">
+      <created>1650360110735</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1650360110735</updated>
+    </task>
+    <task id="LOCAL-00028" summary="done">
+      <created>1650465802049</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1650465802049</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="optimize" />
+    <MESSAGE value="pla parser" />
+    <MESSAGE value="MPRM" />
+    <MESSAGE value="极性间转换" />
+    <MESSAGE value="bug" />
+    <MESSAGE value="." />
+    <MESSAGE value="done" />
+    <option name="LAST_COMMIT_MESSAGE" value="done" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GFrog$main.coverage" NAME="main Coverage Results" MODIFIED="1650866538256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
